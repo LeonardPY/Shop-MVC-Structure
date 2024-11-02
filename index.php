@@ -44,3 +44,4 @@ spl_autoload_register("autoloadFunction");
 
 $router = new RouterController();
 $router->process(array($_SERVER['REQUEST_URI']));
+$router->renderView();

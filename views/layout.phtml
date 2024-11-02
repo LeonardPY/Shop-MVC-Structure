@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/localhost" />
+    <meta charset="UTF-8" />
+    <title><?= $title ?></title>
+    <meta name="description" content="<?= $description ?>" />
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+</head>
+
+<body>
+<header>
+    <h1>ICT.social MVC - Sample website</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="article/home">Home</a></li>
+        <li><a href="article">Articles</a></li>
+        <li><a href="contact">Contact</a></li>
+    </ul>
+</nav>
+<br clear="both" />
+
+<article>
+    <?php $this->controller->renderView(); // renders the current view into the template ?>
+</article>
+
+<footer>
+    <p>Sample tutorial of a simple MVC from <a href="http://www.ict.social" target="_blank">ict.social</a> - The social network for programmers.</p>
+</footer>
+</body>
+</html>

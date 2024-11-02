@@ -21,9 +21,18 @@ class RouterController extends Controller
     public function process($params)
     {
         $parsedUrl = $this->parseUrl($params[0]);
+        if (empty($parsedUrl[0]))
+            $this->redirect('article/home');
         $controllerClass = $this->dashesToCamel(array_shift($parsedUrl)) . 'Controller';
-        echo($controllerClass);
-        echo('<br />');
-        print_r($parsedUrl);
+
+        if (file_exists('controllers/' . $controllerClass . '.php'))
+            $this->controller = new $controllerClass;
+        else
+            $this->redirect('error');
+
+        $this->controller->process($parsedUrl);
+        $this->data['title'] = $this->controller->head['title'];
+        $this->data['description'] = $this->controller->head['description'];
+        $this->view = 'layout';
     }
 }
