@@ -1,7 +1,5 @@
 <?php
 
-use models\EmailSender;
-
 class ContactController extends Controller
 {
     public function process(array $params): void

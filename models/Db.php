@@ -1,10 +1,5 @@
 <?php
 
-namespace models;
-
-use PDO;
-use PDOException;
-
 class Db
 {
     private static array $settings = [
