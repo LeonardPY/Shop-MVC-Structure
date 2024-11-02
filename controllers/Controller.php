@@ -31,16 +31,16 @@ abstract class Controller
 {
 
     /** @var array An array which indexes will be accessible as variables in template */
-    protected $data = array();
+    protected array $data = [];
 
     /** @var string A template name without the extension */
-    protected $view = "";
+    protected string $view = "";
 
     /** @var array The HTML head */
-	protected $head = array('title' => '', 'description' => '');
+	protected array $head = ['title' => '', 'description' => ''];
 
     /** Renders the view*/
-    public function renderView()
+    public function renderView(): void
     {
         if ($this->view)
         {
@@ -49,8 +49,8 @@ abstract class Controller
         }
     }
 
-    /** @param $url Redirects to a given URL */
-	public function redirect($url)
+    /** @param $url string to a given URL */
+	public function redirect(string $url): void
 	{
 		header("Location: /$url");
 		header("Connection: close");
@@ -58,6 +58,6 @@ abstract class Controller
 	}
 
     /** @param array $params URL parameters */
-    abstract function process($params);
+    abstract function process(array $params): void;
 
 }
