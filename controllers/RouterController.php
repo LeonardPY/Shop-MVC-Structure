@@ -1,28 +1,29 @@
 <?php
 class RouterController extends Controller
 {
-    protected $controller;
-    private function parseUrl($url)
+    protected Controller $controller;
+    private function parseUrl(string $url): array
     {
         $parsedUrl = parse_url($url);
         $parsedUrl["path"] = ltrim($parsedUrl["path"], "/");
         $parsedUrl["path"] = trim($parsedUrl["path"]);
-        $explodedUrl = explode("/", $parsedUrl["path"]);
-        return $explodedUrl;
+        return explode("/", $parsedUrl["path"]);
     }
 
-    private function dashesToCamel($text)
+    private function dashesToCamel(string $text): string
     {
         $text = str_replace('-', ' ', $text);
         $text = ucwords($text);
-        $text = str_replace(' ', '', $text);
-        return $text;
+        return str_replace(' ', '', $text);
     }
-    public function process($params)
+    public function process(array $params): void
     {
         $parsedUrl = $this->parseUrl($params[0]);
         if (empty($parsedUrl[0]))
             $this->redirect('article/home');
+        if($parsedUrl[0] == 'router') {
+            $this->redirect('error');
+        }
         $controllerClass = $this->dashesToCamel(array_shift($parsedUrl)) . 'Controller';
 
         if (file_exists('controllers/' . $controllerClass . '.php'))
