@@ -19,8 +19,9 @@ class RouterController extends Controller
     public function process(array $params): void
     {
         $parsedUrl = $this->parseUrl($params[0]);
+
         if (empty($parsedUrl[0]))
-            $this->redirect('article/home');
+            $this->redirect('home');
         if($parsedUrl[0] == 'router') {
             $this->redirect('error');
         }

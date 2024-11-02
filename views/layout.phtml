@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/localhost" />
-    <meta charset="UTF-8" />
+    <base href="/localhost"/>
+    <meta charset="UTF-8"/>
     <title><?= $title ?></title>
-    <meta name="description" content="<?= $description ?>" />
+    <meta name="description" content="<?= $description ?>"/>
     <link rel="stylesheet" href="style.css" type="text/css"/>
 </head>
 
@@ -15,19 +15,22 @@
 
 <nav>
     <ul>
-        <li><a href="article/home">Home</a></li>
-        <li><a href="article">Articles</a></li>
+        <li><a href="home">Home</a></li>
+        <li><a href="product">Product</a></li>
         <li><a href="contact">Contact</a></li>
     </ul>
 </nav>
-<br clear="both" />
+<br clear="both"/>
 
 <article>
-    <?php $this->controller->renderView(); // renders the current view into the template ?>
+    <?php $this->controller->renderView(); ?>
 </article>
 
 <footer>
-    <p>Sample tutorial of a simple MVC from <a href="http://www.ict.social" target="_blank">ict.social</a> - The social network for programmers.</p>
+    <p>
+        Sample tutorial of a simple MVC from
+        <a href="http://www.ict.social" target="_blank">ict.social</a> - The social network for programmers.
+    </p>
 </footer>
 </body>
 </html>

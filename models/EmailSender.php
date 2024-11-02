@@ -1,7 +1,5 @@
 <?php
 
-namespace models;
-
 class EmailSender
 {
     public function send($recipient, $subject, $message, $from): bool
