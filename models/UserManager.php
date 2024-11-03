@@ -2,7 +2,7 @@
 
 class UserManager
 {
-    private static string $table = 'products';
+    private static string $table = 'users';
     public static function query(): ?PDO
     {
         return Db::query();
