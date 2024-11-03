@@ -7,6 +7,10 @@ function autoloadFunction($class): void
 {
     if (str_ends_with($class, 'Controller'))
         require("controllers/" . $class . ".php");
+    elseif (str_ends_with($class, 'Service'))
+        require("services/" . $class . ".php");
+    elseif (str_ends_with($class, 'Enum'))
+        require("enums/" . $class . ".php");
     else
         require("models/" . $class . ".php");
 }

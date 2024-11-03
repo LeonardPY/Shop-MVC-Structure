@@ -46,10 +46,8 @@ class Db
         return $result ? $result[0] : null;
     }
 
-    public static function query(string $query, array $params = []): int
+    public static function query(): ?PDO
     {
-        $result = self::$connection->prepare($query);
-        $result->execute($params);
-        return $result->rowCount();
+        return self::$connection;
     }
 }
