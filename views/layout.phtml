@@ -14,11 +14,18 @@
 </header>
 
 <nav>
-    <ul>
-        <li><a href="home">Home</a></li>
-        <li><a href="product">Product</a></li>
-        <li><a href="contact">Contact</a></li>
-    </ul>
+    <?php if (isset($_SESSION['admin']) || isset($_SESSION['user'])): ?>
+        <ul>
+            <li><a href="home">Home</a></li>
+            <li><a href="product">Product</a></li>
+            <li><a href="contact">Contact</a></li>
+            <li><a href="logout">Logout</a></li>
+        </ul>
+    <?php else: ?>
+        <ul>
+            <li><a href="login">Login</a></li>
+        </ul>
+    <?php endif; ?>
 </nav>
 <br clear="both"/>
 
