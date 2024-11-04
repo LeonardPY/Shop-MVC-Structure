@@ -2,23 +2,36 @@
 
 class ProductManager
 {
-    private static string $table = 'products';
-    public function getProducts(array $params): ?array
+    private PDO $connection;
+    private string $table = 'products';
+
+    public function __construct()
     {
-        return Db::queryAll('SELECT  * FROM ' . static::$table, $params);
+        $this->connection = Db::query();
     }
 
-
-    public function find($id): ?object
+    public static function model(): static
     {
-        $stmt = self::query()->prepare('SELECT * FROM products WHERE id = :id');
+        return new static();
+    }
+
+    public function getProducts(array $params): ?array
+    {
+        return Db::queryAll('SELECT * FROM ' . $this->table, $params);
+    }
+
+    public function find(int $id): mixed
+    {
+        $stmt = $this->connection->prepare('SELECT * FROM ' . $this->table . ' WHERE id = :id');
         $stmt->execute(['id' => $id]);
         return $stmt->fetchObject(self::class);
     }
 
     public function create(array $data): void
     {
-        $stmt = self::query()->prepare('INSERT INTO products (name, description, price, image) VALUES (:name, :description, :price, :image)');
+        $stmt = $this->connection->prepare(
+            'INSERT INTO ' . $this->table . ' (name, description, price, image) VALUES (:name, :description, :price, :image)'
+        );
         $stmt->execute([
             'name' => $data['name'],
             'description' => $data['description'],
@@ -29,8 +42,9 @@ class ProductManager
 
     public function update(int $id, array $data): void
     {
-        $stmt = self::query()->prepare(
-            'UPDATE products SET name = :name, description = :description, price = :price, image = :image WHERE id = :id'
+        $stmt = $this->connection->prepare(
+            'UPDATE ' . $this->table .
+            'SET name = :name, description = :description, price = :price, image = :image WHERE id = :id'
         );
         $stmt->execute([
             'name' => $data['name'],
@@ -43,7 +57,7 @@ class ProductManager
 
     public function delete(int $id): void
     {
-        $stmt = self::query()->prepare('DELETE FROM products WHERE id = :id');
+        $stmt = $this->connection->prepare('DELETE FROM ' . $this->table . ' WHERE id = :id');
         $stmt->execute(['id' => $id]);
     }
 

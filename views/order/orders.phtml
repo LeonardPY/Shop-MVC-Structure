@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<main class="container my-5">
+    <h1>Your Shopping Cart</h1>
+    <div class="row">
+        <?php
+        foreach ($orders as $productId => $quantity):
+            $product = ProductManager::model()->find($productId);
+            if ($product):
+                $subtotal = $product->price * $quantity;
+                $cartTotal += $subtotal;
+                ?>
+                <div class="col-md-4 mb-4" id="product-<?= $productId ?>">
+                    <div class="card shadow-sm">
+                        <img src="/images/<?= $product->image ?>" class="card-img-top product-img img-fluid"
+                             alt="Product Image" style="object-fit: cover; height: 300px;">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $product->name ?></h5>
+                            <p class="card-text"><?= $product->description ?></p>
+                            <p class="card-text" id="product-price-<?= $productId ?>"><?= $product->price ?>$</p>
+                            <p class="card-text">Subtotal: <span id="subtotal-<?= $productId ?>"><?= $subtotal ?>$</span></p>
+                            <div class="quantity-group">
+                                <button class="btn btn-outline-secondary quantity-button quantity-decrease" type="button"
+                                        data-product-id="<?= $productId ?>" aria-label="Decrease quantity">-</button>
+                                <input type="number" class="form-control quantity-input" value="<?= $quantity ?>" min="1"
+                                       data-product-id="<?= $productId ?>">
+                                <button class="btn btn-outline-secondary quantity-button quantity-increase" type="button"
+                                        data-product-id="<?= $productId ?>" aria-label="Increase quantity">+</button>
+                                <button class="btn btn-danger remove-from-cart-button" type="button"
+                                        data-product-id="<?= $productId ?>">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; endforeach; ?>
+    </div>
+
+    <div class="mt-4">
+        <h4 id="cart-total">Total: <?= $cartTotal ?>$</h4>
+    </div>
+    <button class="btn btn-warning clear-cart-button">Clear Cart</button>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
